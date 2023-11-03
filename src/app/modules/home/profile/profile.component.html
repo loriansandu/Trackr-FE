@@ -1,0 +1,154 @@
+<meta name="theme-color" content="#FFFFFF"/>
+<div class="profile-container grid">
+  <p-toast class="custom-toast" ></p-toast>
+  <div class="profile-image-container col-12 sm:col-4">
+    <p-card *ngIf="userInfo" header="Profile picture" styleClass="shadow-3">
+      <div class="profile-image grid sm:gap-1 md:gap-0">
+        <div class="col-6 sm:col-12 md:col-8 xl:col-6 " style="min-height: 150px; max-height: 200px;" >
+          <p-avatar shape="square" label="" size="xlarge" styleClass="profile-picture max-w-9min0rem" [image]="userInfo.profilePicture || undefined"></p-avatar>
+        </div>
+        <div class="col-6 sm:col-12 md:col-4 xl:col-6 flex flex-column justify-content-evenly" style="min-height: 7.5rem">
+          <p-button label="{{uploadPictureText}}" [outlined]="true" [loading]="updateImageLoading"  [styleClass]="getUploadPictureStyleClass()"  styleClass= "test" (onClick)="fileInput.click()"></p-button>
+          <input
+                  type="file"
+                  accept="image/*"
+                  (change)="onFileSelected($event)"
+                  #fileInput
+                  style="display: none;"
+          />
+          <p-confirmPopup></p-confirmPopup>
+          <p-button label="{{removePictureText}}" [outlined]="true" [styleClass]="getRemovePictureStyleClass()" (onClick)="confirmRemovePicture($event)" ></p-button>
+        </div>
+      </div>
+    </p-card>
+    <p-card *ngIf="!userInfo" header="Profile picture" styleClass="shadow-3">
+      <div class="profile-image grid sm:gap-1 md:gap-0">
+        <div class="col-6 sm:col-12 md:col-8 xl:col-6" style="min-height: 120px;" >
+          <p-skeleton shape="rectangle" styleClass="profile-picture w-full h-full"></p-skeleton>
+        </div>
+        <div class="col-6 sm:col-12 md:col-4 xl:col-6 flex flex-column justify-content-evenly" style="min-height: 7.5rem">
+          <p-skeleton shape="rectangle"  [styleClass]="'w-full h-3rem'"></p-skeleton>
+          <p-skeleton shape="rectangle"  [styleClass]="'w-full h-3rem'"></p-skeleton>
+        </div>
+      </div>
+    </p-card>
+  </div>
+  <div class="general-info-container col-12 sm:col-8" >
+    <p-card *ngIf="userInfo" header="General Information" styleClass="shadow-3" >
+      <div class="grid gap-6 md:gap-0 lg:gap-0 mt-2 ml-0" >
+         <span class="p-float-label col-12 md:col-6 p-0">
+           <input class="w-11" pInputText id="first-name" [(ngModel)]="firstName" />
+           <label htmlFor="first-name" > First name</label>
+          </span>
+        <span class="p-float-label col-12 md:col-6 p-0" >
+          <input  class="w-11" pInputText id="last-name" [(ngModel)]="lastName" />
+          <label htmlFor="last-name">Last name</label>
+        </span>
+      </div>
+      <ng-template pTemplate="footer">
+        <p-button label="Update" styleClass="p-button-raised p-button-secondary" [loading]="updateProfileLoading" (onClick)="onUpdateProfileInfo()"></p-button>
+      </ng-template>
+    </p-card>
+    <p-card *ngIf="!userInfo" header="General Information" styleClass="shadow-3">
+      <div class="grid gap-6 md:gap-0 lg:gap-0 mt-2 ml-0" >
+         <span class="p-float-label col-12 md:col-6 p-0">
+           <p-skeleton shape="rectangle"  [styleClass]="'w-11 h-3rem'"></p-skeleton>
+          </span>
+        <span class="p-float-label col-12 md:col-6 p-0" >
+           <p-skeleton shape="rectangle"  [styleClass]="'w-11 h-3rem'"></p-skeleton>
+        </span>
+      </div>
+      <ng-template pTemplate="footer">
+          <p-skeleton shape="rectangle"  [styleClass]="'w-7rem h-2rem'"></p-skeleton>
+      </ng-template>
+    </p-card>
+  </div>
+  <div class="security-info-container col-12">
+    <p-card *ngIf="userInfo" header="Security Information" styleClass="shadow-3">
+      <div class="grid gap-4 sm:gap-0">
+        <span class="p-input-icon-left col-12 sm:col-4 p-0">
+          <i class="fa-regular fa-envelope"></i>
+          <input *ngIf="userInfo" type="text" pInputText [disabled]="true" [(ngModel)]="userInfo.email"  class="w-11"/>
+        </span>
+        <span class="p-input-icon-left col-12 sm:col-4 p-0">
+          <i class="fa-solid fa-lock"></i>
+          <input *ngIf="userInfo" [type]="passswordInputType" pInputText [disabled]="true" [(ngModel)]="userInfo.email"  class="w-11"/>
+        </span>
+        <span class="p-input-icon-left col-12 sm:col-4 p-0">
+          <i class="pi pi-phone"></i>
+          <input *ngIf="userInfo"  pInputText disabled [(ngModel)]="userInfo.phoneNumber" [pKeyFilter]="'int'" placeholder="Phone number"  class="w-11" />
+        </span>
+      </div>
+      <ng-template pTemplate="footer">
+        <div class="grid">
+          <div class="sm:col-4"></div>
+          <p-button label="Change password" [outlined]="true" (onClick)="showPasswordDialog()" class="col-12 sm:col-4 md:col-4 sm:p-0" styleClass="p-button-outlined p-button-secondary h-full"></p-button>
+          <p-dialog header="Change your password" (onHide)="resetForm()" [(visible)]="changePasswordDialogVisible" [modal]="true" styleClass="w-10 sm:max-w-30rem" class="">
+            <form [formGroup]="changePasswordForm" (ngSubmit)="changePassword()" class="change-password-form grid row-gap-4" autocomplete="off">
+              <span class="p-float-label col-12 p-0">
+                <p-password formControlName="password" id="current-password" styleClass="w-full" inputStyleClass="w-full"  [class]="getPasswordError() !='' && isPasswordInvalid? 'ng-invalid ng-dirty' : ''"[feedback]="false"></p-password>
+                <label for="current-password" style="color: #6c757d">Current Password</label>
+              </span>
+              <div *ngIf="getPasswordError() !='' && isPasswordInvalid" class="password-modal-invalid-value">
+                <img ngSrc="../../../../assets/warning.png" alt="" height="16" width="16" style="margin-right: 5px;">
+                {{getPasswordError()}}
+              </div>
+                <span class="p-float-label col-12 p-0">
+                    <p-password formControlName="newPassword" id="newPassword" styleClass="w-full" inputStyleClass="w-full" [class]="getNewPasswordError() !='' && isNewPasswordInvalid? 'ng-invalid ng-dirty' : ''" [feedback]="false"></p-password>
+                    <label for="newPassword" style="color: #6c757d">New Password </label>
+                </span>
+              <div *ngIf="getNewPasswordError() !='' && isNewPasswordInvalid" class="password-modal-invalid-value">
+                <img ngSrc="../../../../assets/warning.png" alt="" height="16" width="16" style="margin-right: 5px;">
+                {{getNewPasswordError()}}
+              </div>
+                <span class="p-float-label col-12 p-0">
+                    <p-password formControlName="confirmPassword" styleClass="w-full" inputStyleClass="w-full" id="newPasswordConfirm" [class]="getConfirmPasswordError() !='' && isConfirmPasswordInvalid? 'ng-invalid ng-dirty' : ''"  [feedback]="false"></p-password>
+                    <label for="newPasswordConfirm" style="color: #6c757d">Confirm New Password</label>
+                </span>
+              <div *ngIf="getConfirmPasswordError() !='' && isConfirmPasswordInvalid" class="password-modal-invalid-value">
+                <img ngSrc="../../../../assets/warning.png" alt="" height="16" width="16" style="margin-right: 5px;">
+                {{getConfirmPasswordError()}}
+              </div>
+            </form>
+            <div class="flex justify-content-center mt-4">
+              <p-button label="Update password" styleClass="p-button-raised p-button-secondary" [loading]="updatePasswordLoading" (onClick)="changePassword()"></p-button>
+            </div>
+          </p-dialog>
+          <p-button label="Change phone number" [outlined]="true" (onClick)="showNumberDialog()" class="col-12 sm:col-4 md:col-4 sm:p-0" styleClass="p-button-outlined p-button-secondary h-full"></p-button>
+          <p-dialog header="Change your number" (onHide)="resetForm()" [(visible)]="changeNumberDialogVisible" [modal]="true" styleClass="w-10 sm:max-w-30rem" class="">
+            <form [formGroup]="changeNumberForm" (ngSubmit)="changeNumber()" >
+              <span class="p-input-icon-left w-full">
+                <i class="pi pi-phone"></i>
+                <input pInputText [pKeyFilter]="'int'" placeholder="Phone number" class="w-full" formControlName="number" [ngClass]="getNumberError() !='' && isNumberInvalid? 'error-form-field' : ''"/>
+              </span>
+              <div *ngIf="getNumberError() !='' && isNumberInvalid" class="invalid-value">
+                <img ngSrc="../../../../assets/warning.png" alt="" height="16" width="16" style="margin-right: 5px;">
+                {{getNumberError()}}
+              </div>
+            </form>
+            <div class="flex justify-content-center mt-4">
+              <p-button label="Update number" styleClass="p-button-raised p-button-secondary" (onClick)="changeNumber()"></p-button>
+            </div>
+          </p-dialog>
+        </div>
+      </ng-template>
+    </p-card>
+    <p-card *ngIf="!userInfo" header="Security Information" styleClass="shadow-3">
+      <div class="grid gap-4 sm:gap-0">
+        <p-skeleton shape="rectangle"  class="col-12 sm:col-4 p-0" styleClass="h-3rem w-11"></p-skeleton>
+        <p-skeleton shape="rectangle"  class="col-12 sm:col-4 p-0" styleClass="h-3rem w-11"></p-skeleton>
+        <p-skeleton shape="rectangle"  class="col-12 sm:col-4 p-0" styleClass="h-3rem w-11"></p-skeleton>
+      </div>
+      <ng-template pTemplate="footer">
+        <div class="grid">
+          <div class="sm:col-4"></div>
+            <p-skeleton shape="rectangle"  class="col-12 sm:col-4 md:col-4 sm:p-0" styleClass="h-3rem w-11"></p-skeleton>
+            <p-skeleton shape="rectangle"  class="col-12 sm:col-4 md:col-4 sm:p-0" styleClass="h-3rem w-11"></p-skeleton>
+        </div>
+      </ng-template>
+    </p-card>
+  </div>
+</div>
+
+
+

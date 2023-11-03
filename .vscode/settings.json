@@ -1,0 +1,10 @@
+{
+    "window.zoomLevel": -1,
+    "editor.minimap.enabled": false,
+    "workbench.tree.indent": 15,
+    "workbench.colorTheme": "Tokyo Night Storm",
+    "editor.fontFamily": "'Noteworthy Bold'",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 14,
+    "editor.lineHeight": 25,
+}

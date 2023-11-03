@@ -1,0 +1,13 @@
+<ul class="layout-menu">
+  <ng-container *ngFor="let item of model; let i = index;">
+    <li >
+      <a [routerLink]="item.routerLink" class="no-underline">
+        <i [class]="item.icon" class="layout-menuitem-icon w-2" ></i>
+        <div class="font-medium text-base">
+          {{item.label}}
+        </div>
+      </a>
+    </li>
+<!--    <li *ngIf="item.separator" class="menu-separator"></li>-->
+  </ng-container>
+</ul>

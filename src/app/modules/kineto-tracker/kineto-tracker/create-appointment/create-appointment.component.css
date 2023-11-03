@@ -1,0 +1,222 @@
+:host /deep/.p-dialog {
+  border-radius: 20px;
+  width: 100vw;
+  height: 79.9vh;
+  top: 100px;
+}
+
+:host /deep/.p-dialog-header {
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+}
+
+.container {
+  margin-top: 50px;
+  padding: 10px;
+  .question-container {
+    width: 110%;
+  }
+}
+
+.container-error {
+  margin-top: 30px;
+  .appointments-number {
+    margin-bottom: 2rem!important;
+  }
+}
+
+.modal-container .date {
+  /* transition: margin 0.3s ease-in-out;   */
+  .p-datepicker table td {
+    padding: 0.1rem!important;
+  }
+  .p-datepicker table td > span { 
+    /* width: 1rem;
+    height: 1rem; */
+  }
+}
+
+:host /deep/.p-dropdown {
+  border-radius: 0;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+@media only screen and (min-width: 768px) {
+  :host /deep/.p-dialog {
+    width: 70vw;
+    height: 70vh;
+    top: 0;
+  }
+  :host /deep/.p-dialog-header {
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+  }
+  .container {
+    margin-top: 50px;
+    
+
+  }
+  .container-error {
+    .appointments-number {
+      margin-bottom: 3rem!important;
+    }
+  }
+  :host /deep/.p-scroller {
+    /* height: 350px!important; */
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  :host /deep/.p-dialog {
+    width: 50vw;
+    /* height: 70vh; */
+    height: auto;
+    min-height: 70vh;
+    top: 0;
+  }
+  :host /deep/.p-dialog-header {
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+  }
+  .container {
+    margin-top: 50px;
+
+  }
+  .container-error {
+    margin-top: 20px;
+    .appointments-number {
+      margin-bottom: 3rem!important;
+    }
+  }
+
+}
+:host /deep/ .p-inputtext:enabled:focus, :host /deep/ .p-dropdown:focus, :host /deep/ .p-focus   {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.08rem var(--main-color-4);
+  border-color: var(--main-color-4);
+}
+
+:host /deep/ .p-inputtext:enabled:hover,  :host /deep/ .p-dropdown:hover {
+
+  /* border-color: #3B82F6; */
+  border-color: var(--main-color-4);
+}
+
+:host /deep/ .p-steps .p-steps-item:before {
+  border-top: 1px solid var(--main-color-4)!important;
+}
+
+:host /deep/ .p-steps .p-steps-item.p-highlight .p-steps-number {
+  color: white;
+  background: var(--main-color-1)
+}
+
+.alert-error {
+  width: 100%;
+  margin-top: 30px;
+  border: 1px solid #e91916;
+  border-left: 0.4rem solid #e91916;
+  border-radius: 0.6rem;
+  padding: 1rem 2rem 1rem 1rem;
+  font-size:
+    13px;
+  line-height: 21px;
+  font-family: Inter, sans-serif;
+}
+
+:host /deep/ .p-calendar {
+  border-radius: 0;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  & input {
+    border-radius: 0;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+  }
+}
+
+:host /deep/ .p-datepicker-calendar {
+  height: 200px;
+
+}
+
+
+:host /deep/ .p-datepicker table td > span {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+:host /deep/ .p-datepicker .p-datepicker-header .p-datepicker-title {
+  line-height: 0;
+  display: flex;
+}
+
+:host /deep/ .p-selectbutton .p-button.p-highlight{
+  background: var(--main-color-4);
+  border: 1px solid var(--main-color-4);
+
+}
+:host /deep/ .p-button:focus {
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--main-color-5), 0 1px 2px 0 black;
+}
+
+:host /deep/ .p-buttonset .p-button:first-of-type, :host /deep/ .p-buttonset .p-button:last-of-type  {
+  padding: 10px!important;
+}
+
+.appointment{
+  /* background-color: #BAC8BA!important; */
+  border: 1px solid #efefef!important;
+  border-radius: 10px;
+  box-shadow: 0px 3px 5px rgba(204, 220, 206, 0.02), 0px 0px 2px rgba(0, 0, 0, 0.05), 0px 1px 4px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 1px #efefef;
+  .title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  .date {
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+}
+
+:host /deep/ .p-virtualscroller-item {
+  padding: 10px!important;
+  display: flex;
+  justify-content: center;
+}
+
+.appointment-time-picker {
+  color: #495057;
+  background: #ffffff;
+  border: 1px solid #ced4da;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+:host /deep/ .atcb-initialized {
+  margin-top: 50px!important;
+}
+
+.appointment-data {
+  width: --webkit-fill-available;
+}
+
+.date-unavailable {
+  color: red !important;
+  outline: 1px solid red !important;
+}
+
+:host /deep/ .p-dropdown-items-wrapper {
+  max-height: 200px !important;
+  overflow: auto;
+}
+
+:host /deep/ .p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+  /* padding: 5px; */
+  padding: 0.75rem 1.25rem
+}

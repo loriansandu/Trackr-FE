@@ -1,0 +1,70 @@
+<div class="register-container" *ngIf="!verifyCodePage">
+  <div class="register-container-header">
+    <div class="header-logo"> Trackr. </div>
+    <div class="header-text"> Create your account </div>
+  </div>
+  <div class="alert-error" [@fadeInOut]="invalidEmail ? 'in' : 'void'" *ngIf="invalidEmail">An account with this email address already exists.
+    Please try again.</div>
+  <form [formGroup]="authForm" (ngSubmit)="onSubmit()" class="auth-form" autocomplete="off">
+    <label class="email-form-field" for="email" [ngClass]="getEmailError() !='' && isEmailInvalid? 'error-form-field' : ''">
+      <input
+        type="email"
+        name="user-email"
+        id="email"
+        formControlName="email"
+        class="input-field"
+        placeholder="Email"
+      />
+      <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#9085ff}</style><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg>
+    </label>
+    <div *ngIf="getEmailError() !='' && isEmailInvalid" class="invalid-value">
+      <img ngSrc="../../../../assets/warning.png" alt="" height="16" width="16" style="margin-right: 5px;">
+      {{getEmailError()}}
+    </div>
+    <label class="password-form-field" for="password" [ngClass]="getPasswordError() !='' && isPasswordInvalid? 'error-form-field' : ''">
+      <input
+        [type]="fieldTextType ? 'text' : 'password'"
+        name="user-password"
+        id="password"
+        formControlName="password"
+        class="input-field"
+        placeholder="Password"
+      />
+    </label>
+    <div *ngIf="getPasswordError() !='' && isPasswordInvalid" class="invalid-value">
+      <img ngSrc="../../../../assets/warning.png" alt="" height="16" width="16" style="margin-right: 5px;">
+      {{getPasswordError()}}
+    </div>
+    <label class="password-form-field" for="confirm-password" [ngClass]="getConfirmPasswordError() !='' && isConfirmPasswordInvalid? 'error-form-field' : ''">
+      <input
+        [type]="fieldTextType ? 'text' : 'password'"
+        name="user-password"
+        id="confirm-password"
+        formControlName="confirmPassword"
+        class="input-field"
+        placeholder="Confirm password"
+      />
+    </label>
+    <div *ngIf="getConfirmPasswordError() !='' && isConfirmPasswordInvalid" class="invalid-value">
+      <img ngSrc="../../../../assets/warning.png" alt="" height="16" width="16" style="margin-right: 5px;">
+      {{getConfirmPasswordError()}}
+    </div>
+  </form>
+  <div class="register-container-footer">
+    <button class="register-button" *ngIf="!loading" (click)="onSubmit()"> Register </button>
+    <div class="register-button spinner" *ngIf="loading">
+      <img src="../../../../assets/loading-spinner-main-color-white.svg" [height]="53" [width]="53">
+    </div>
+    <div class="go-to-login-container"> Already have an account?
+      <a class="go-to-login-button" [routerLink]="['/auth/login']">Sign in</a>
+    </div>
+    <div class="empty-line">
+      <span>OR</span>
+    </div>
+    <div class="flex justify-content-center">
+      <asl-google-signin-button shape="pill" text="continue_with" [width]="containerWidth" size="medium" type="standard"  #customGoogleBtn></asl-google-signin-button>
+    </div>
+
+  </div>
+</div >
+<app-verify-account *ngIf="verifyCodePage" email="{{authForm.value.email}}" (triggerCorrectCode)="redirectToLoginPage()"></app-verify-account>

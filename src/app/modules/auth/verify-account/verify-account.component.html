@@ -1,0 +1,15 @@
+<div class="verify-email-container">
+  <div class="verify-email-box">
+    <img src="../../../../assets/email.png" alt="" class="mail-icon">
+    <span class="big-text">Verify Your Account</span>
+    <div class="empty-line"></div>
+    <div class="alert-resent-code" [@fadeInOut]="resentCode ? 'in' : 'void'" *ngIf="resentCode && resentCode != undefined ">New code sent. </div>
+    <span class="small-text">Insert the 5-digit code  that we <br> have sent to your email {{email}}.</span>
+    <ng-otp-input  (onInputChange)="onOtpChange($event)"  [config]="{length: 5, inputClass: 'validation-code-input'}"></ng-otp-input>
+    <div class="alert-wrong-code" *ngIf="!correctCode && correctCode != undefined ">Wrong code. Please try again. </div>
+    <div class="button resend" (click)="resendCode(true)" *ngIf="!loading"> Resend Code </div>
+    <div class="button resend spinner" *ngIf="loading">
+      <img src="../../../../assets/loading-spinner-transparent-main-color.svg" [height]="40" [width]="40">
+    </div>
+  </div>
+</div>

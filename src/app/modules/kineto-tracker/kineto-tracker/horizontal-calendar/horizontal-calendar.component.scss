@@ -1,0 +1,99 @@
+.calendar-container {
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  left: 0;
+  width: 100vw;
+  //top: 80px;
+  z-index: 996;
+  background: white;
+  // background: var(--main-color-1);
+  // color: white;
+  //height: 83px;
+  align-items: center;
+  //border-bottom: 1px solid red;
+  top: 72px;
+  //height: 96px;
+  //border-bottom-left-radius: 20px;
+  //border-bottom-right-radius: 20px;
+}
+
+.week-carousel {
+  display: flex;
+  overflow-x: scroll;
+  width: 90%;
+  //height: 100%;
+  height: 90px;
+  //overflow-x: hidden;
+  white-space: nowrap;
+  transition: transform 0.3s ease-in-out;
+}
+
+.day {
+  width: calc(100% / 7);
+  text-align: center;
+  //padding-bottom: 5px;
+  padding-top: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 30px;
+
+}
+.today {
+  color: #A2C9A1;
+}
+
+
+.day-number {
+  //font-size: smaller; 
+}
+.day-name {
+  margin-bottom : 5px;
+}
+
+
+.selected {
+  font-weight: bold;
+  background: var(--main-color-4);
+  color: white;
+  padding: 8px;
+  border-radius: 30px; /* Create a circular shape */
+
+  animation: bubble 0.15s ease; /* Apply the bubble animation */
+}
+
+@keyframes bubble {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.8;
+  }
+  25% {
+    transform: scale(0.75); /* Increase size */
+    opacity: 0.8; /* Partially transparent */
+  }
+  50% {
+    transform: scale(0.9); /* Increase size */
+    opacity: 0.9; /* Partially transparent */
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.arrow-animation {
+  animation: arrow-click 0.5s;
+}
+
+@keyframes arrow-click {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

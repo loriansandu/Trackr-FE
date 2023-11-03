@@ -1,0 +1,5 @@
+<div class="time-picker">
+  <p-dropdown [options]="hours" [(ngModel)]="selectedHour" class="w-5rem" (onChange)="emitHourValue($event)" placeholder="Select Item"
+              scrollHeight="200px" styleClass="item"></p-dropdown>
+  <p-dropdown [options]="minutes" [(ngModel)]="selectedMinute" (onChange)="emitMinuteValue($event)" placeholder="Select Item" styleClass="item"></p-dropdown>
+</div>

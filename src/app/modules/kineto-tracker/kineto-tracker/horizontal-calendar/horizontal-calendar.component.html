@@ -1,0 +1,33 @@
+<!-- <div class="calendar-container"  >
+  <i class="pi pi-angle-left w-2rem flex justify-content-center cursor-pointer" (click)="scrollLeft()"></i>
+  <div class="week-carousel" >
+    <div class="day" *ngFor="let day of week" (click)="selectDay(day)" [class]="isSelectedDay(day) ? 'selected' : isToday(day) ? 'today' : ''" >
+      <div class="day-name">{{ day | date: 'EEE' }}</div>
+      <div class="day-number">{{ day | date: 'd' }}</div>
+    </div>
+  </div>
+  <i class="pi pi-angle-right w-2rem flex justify-content-center cursor-pointer" (click)="scrollRight()"></i>
+</div> -->
+<div class="calendar-container">
+  <i
+    class="pi pi-angle-left w-2rem flex justify-content-center cursor-pointer"
+    (click)="scrollLeft(); addArrowAnimation('leftArrowIcon')"
+    [ngClass]="{ 'arrow-animation': arrowAnimation === 'leftArrowIcon' }"
+  ></i>
+  <div class="week-carousel">
+    <div
+      class="day"
+      *ngFor="let day of week"
+      (click)="selectDay(day)"
+      [class]="isSelectedDay(day) ? 'selected' : isToday(day) ? 'today' : ''"
+    >
+      <div class="day-name">{{ day | date: 'EEE' }}</div>
+      <div class="day-number">{{ day | date: 'd' }}</div>
+    </div>
+  </div>
+  <i
+    class="pi pi-angle-right w-2rem flex justify-content-center cursor-pointer"
+    (click)="scrollRight(); addArrowAnimation('rightArrowIcon')"
+    [ngClass]="{ 'arrow-animation': arrowAnimation === 'rightArrowIcon' }"
+  ></i>
+</div>

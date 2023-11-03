@@ -1,0 +1,28 @@
+/* Apply general styling to the time picker */
+.time-picker {
+  height: 100%;
+  font-family: Arial, sans-serif;
+  outline: none!important;
+}
+
+/* Style the hour and minute select elements */
+:host /deep/ .item {
+  width: 100px;
+  /*padding: 6px;*/
+  border: none;
+  margin-right: 2px;
+  outline: none!important;
+  color: black!important;
+  border-radius: 0!important;
+  background-color: white!important;
+  &:hover {
+    background: #e9ecef
+  }
+
+}
+
+/* Apply custom styling to the selected time */
+.selected-time {
+  color: var(--main-color-3) !important; /* Blue color for the selected time */
+  font-weight: bold;
+}

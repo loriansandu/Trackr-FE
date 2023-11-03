@@ -1,0 +1,25 @@
+:host /deep/ .p-calendar .p-datepicker {
+  /*//background-color:#F0F0F0!important;*/
+  border-radius: 10px!important;
+  /* border: 2px dashed #EDEFF1; */
+  border: none;
+}
+:host /deep/ .p-datepicker table td > span.p-highlight {
+  color: var(--main-color-1);
+  background: #C6E3C5;
+}
+:host /deep/ .p-datepicker table td > span:focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.2rem var(--main-color-2);
+}
+
+:host /deep/ .p-datepicker:not(.p-disabled) table td span:not(.p-highlight):not(.p-disabled):hover {
+  background: #A2C9A1;
+  /*color: white;*/
+}
+:host /deep/  .p-datepicker table td.p-datepicker-today > span {
+  color: white;
+  background: var(--main-color-1);
+  border-color: transparent;
+}

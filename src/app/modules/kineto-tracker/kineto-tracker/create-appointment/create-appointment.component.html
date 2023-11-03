@@ -1,0 +1,111 @@
+<p-dialog header="Create Appointment" [(visible)]="addAppointmentsModalVisible" (onHide)="hideModal()" [modal]="true" [style]="{}" [draggable]="false" [resizable]="false">
+  <div class="modal-container">
+    <p-steps [model]="createAppModal" [readonly]="true" [activeIndex]="activeIndex" (activeIndexChange)="onActiveIndexChange($event)">
+    </p-steps>
+    <!-- <div class="alert-error" [@fadeInOut]="dialogError.error ? 'in' : 'void'" *ngIf="dialogError.error">{{dialogError.error}}</div> -->
+    <div class="alert-error" [ngClass]="dialogError.error ? 'flex' : 'hidden'">{{dialogError.error}}</div>
+    <div *ngIf="activeIndex === 0" class="container general" [ngClass]="dialogError.error ? 'container-error' : ''">
+      <div class="p-inputgroup w-full mb-5">
+        <span class="p-inputgroup-addon">
+            <i class="pi pi-tag"></i>
+        </span>
+        <input pInputText placeholder="Title" [(ngModel)]="title"/>
+      </div>
+      <div class="p-inputgroup w-full mb-5">
+        <span class="p-inputgroup-addon">
+            <i class="pi pi-user"></i>
+        </span>
+        <p-dropdown [options]="trainers" [(ngModel)]="selectedTrainer" optionLabel="name" placeholder="Select a trainer" styleClass="w-full"></p-dropdown>
+      </div>
+      <div class="p-inputgroup w-full mb-8 appointments-number">
+        <span class="p-inputgroup-addon">
+            <i class="pi pi-book"></i>
+        </span>
+        <p-inputNumber [(ngModel)]="numberOfAppointments" inputId="minmax" mode="decimal" [min]="1" [max]="5" autocomplete="off" placeholder="Enter number of appointments"> </p-inputNumber>
+      </div>
+      <div class="w-full flex justify-content-center">
+        <p-button label="Continue" [outlined]="true" (onClick)="nextDialog()" class="w-5" styleClass="p-button-outlined p-button-secondary h-full w-full"></p-button>
+      </div>
+    </div>
+    <div *ngIf="activeIndex === 1" class="container date fadeindown animation-duration-200" [ngClass]="dialogError.error ? 'container-error' : ''">
+      <div class="p-inputgroup w-full mb-5" [ngClass]="allAppointmentsSameHour === 'yes' ? 'mb-6' : ''">
+        <span class="p-inputgroup-addon">
+            <i class="pi pi-calendar-times"></i>
+        </span>
+        <p-calendar [firstDayOfWeek]="1" [minDate]="minDate" [placeholder]="numberOfAppointments == 1 ? 'Select the date' : 'Select the dates'" [(ngModel)]="dates" class="w-full" styleClass="w-full" selectionMode="multiple" [readonlyInput]="true" [maxDateCount]="numberOfAppointments" (onClickOutside)="updateDates()" (onFocus)="removeError()"></p-calendar>
+      </div>
+      <div class="grid lg:w-full align-items-center justify-content-evenly mb-4 question-container " *ngIf="dates.length == numberOfAppointments && numberOfAppointments > 1" [ngClass]="allAppointmentsSameHour === 'yes' ? 'mb-6' : ''">
+        <div class="p-0 w-fit text-sm lg:text-base">The appointments have the same hour?</div>
+        <p-selectButton class="flex w-fit p-0" [options]="[{label: 'Yes', value: 'yes'}, {label: 'No', value: 'no'}]" [(ngModel)]="allAppointmentsSameHour" optionLabel="label" optionValue="value"></p-selectButton>
+     </div>
+     <div *ngIf="dates.length == numberOfAppointments && allAppointmentsSameHour === 'yes'">
+      <div class="p-inputgroup w-full mb-7 sm:mb-8">
+        <span class="p-inputgroup-addon">
+            <i class="pi pi-clock"></i>
+        </span>
+        <app-time-picker class="appointment-time-picker w-full" (emitHourValueToParent)="getSelectedHour($event, -1)" (emitMinuteValueToParent)="getSelectedMinute($event, -1)"></app-time-picker>
+<!--        <p-calendar  placeholder="Select the hour" [(ngModel)]="appointmentsHour" class="w-full" styleClass="w-full" [readonlyInput]="true" [timeOnly]="true" [showTime]="true" [showSeconds]="false" [hourFormat]="'24'"></p-calendar>-->
+      </div>
+     </div>
+      <div *ngIf="dates.length == numberOfAppointments && allAppointmentsSameHour === 'no'" class="mb-5">
+        <p-accordion [activeIndex]="0">
+          <p-accordionTab header="{{getDayNameFromDate(appointment.date)}} {{appointment.date.toLocaleDateString()}}" *ngFor="let appointment of appointments; let i = index" [tabStyleClass]="appointment.error ? 'border-round border-solid border-red-400' : 'font-italic'">
+            <div class="p-inputgroup w-full">
+              <span class="p-inputgroup-addon">
+                <i class="pi pi-clock"></i>
+              </span>
+              <app-time-picker class="appointment-time-picker w-full" (emitHourValueToParent)="getSelectedHour($event, i)" (emitMinuteValueToParent)="getSelectedMinute($event, i)"></app-time-picker>
+<!--              <p-calendar placeholder="Select the hour" [(ngModel)]="appointment.hour" class="w-full" styleClass="w-full" [readonlyInput]="true" [timeOnly]="true" [showTime]="true" [showSeconds]="false" [hourFormat]="'24'"></p-calendar>-->
+            </div>
+          </p-accordionTab>
+        </p-accordion>
+      </div>
+      <div class="w-full flex justify-content-center" >
+        <p-button label="Continue" [outlined]="true" (onClick)="nextDialog()" class="w-5" styleClass="p-button-outlined p-button-secondary h-full w-full" [ngClass]="allAppointmentsSameHour ==='no' ? 'mb-7' : ''"></p-button>
+      </div>
+    </div>
+    <div *ngIf="activeIndex === 2" class="container confirm mt-4 sm:mt-3 p-0 sm:p-2" [ngClass]="dialogError.error ? 'container-error' : ''">
+      <p-virtualScroller [value]="appointments" [options]="scrollerOptions" styleClass="w-full" [scrollHeight]="scrollerHeight" [itemSize]="appointments.length === 1 ? 150 : 125">
+        <ng-template pTemplate="appointment" let-appointment>
+            <div class="flex justify-content-center p-2 h-full w-full p-3 appointment">
+              <p-avatar label="{{appointment.trainer[0]}}" styleClass="w-4rem h-4rem sm:w-5rem sm:h-5rem" size="xlarge" class=" flex justify-content-center align-items-center  w-3 mr-3 md:mr-5" shape="circle"></p-avatar>
+              <div class="appointment-data flex flex-column w-8">
+                <div class="title"> {{ appointment.title }}</div>
+                <div class="date"><i style="color: var(--main-color-4); margin-right: 5px;">{{getDayNameFromDate(appointment.date)}}</i> {{ appointment.date.toLocaleDateString() }} <b style="color: var(--main-color-5)">{{appointment.hour}}:{{appointment.minute}}</b></div>
+                <p-tag [severity]="appointment.severity" [value]="'Appointment : ' + appointment.number"></p-tag>
+              </div>
+            </div>
+        </ng-template>
+    </p-virtualScroller>
+    <p-divider align="center">
+      <b>Add to calendar</b>
+    </p-divider>
+    <div class="add-to-calendar mt-3 sm:mt-4 flex justify-content-center sm:justify-content-start">
+      <add-to-calendar-button
+      styleLight="--btn-shadow:none;
+                  --btn-shadow-hover:none;
+                  --btn-shadow-active:none;
+                  --btn-background:white; 
+                  --btn-background-hover:white; 
+                  --btn-text:var(--main-color-1);
+                  --btn-text-hover:var(--main-color-1);
+                  --font:var(--font-family)
+                  --modal-btn-background:white;"
+      name="Kineto"
+      [attr.dates]="remindersAsJson"
+      timeZone="Europe/Bucharest"
+      location="Iasi"
+      options="'Apple','Google'"
+      lightMode="bodyScheme"
+      hideBackground
+      buttonsList
+      size="8|6|4">
+    </add-to-calendar-button>
+    </div>
+    <div class="w-full flex justify-content-center mt-2 sm:mt-4" [ngClass]="appointments.length == 1 ? 'mt-5' : ''">
+      <p-button label="Confirm" [outlined]="true" (onClick)="nextDialog()" class="w-5" styleClass="p-button-outlined p-button-secondary h-full w-full" [ngClass]="allAppointmentsSameHour ==='no' ? 'mb-7' : ''"></p-button>
+    </div>
+    </div>
+  </div>
+</p-dialog>
+

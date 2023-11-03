@@ -1,0 +1,112 @@
+.verify-email-container {
+  height: 100vh;
+  background-color: #F6F7F9;
+  display: flex;
+  justify-content: center;
+  /*height: -webkit-fill-available;*/
+  .verify-email-box {
+    /*height: 70vh;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .mail-icon {
+      height: 200px;
+      width: 200px;
+    }
+    .big-text {
+      font-size: 20px;
+      margin-bottom: 40px;
+      margin-top: 40px;
+      color: #1A1A1A;
+      font-family: 'Inter', sans-serif;
+    }
+    .empty-line {
+      content: "";
+      border-bottom: 1px solid #c2c8d0;
+      width: 30%;
+      max-width: 150px;
+      margin-bottom: 30px;
+    }
+    .small-text {
+      text-align: center;
+      color: #858585;
+      margin-bottom: 40px;
+      /*color: #F6F7F9;*/
+      & mark {
+        background: none;
+        color: var(--main-color-2);
+      }
+    }
+    .alert-resent-code {
+      text-align: center;
+      width: 50%;
+      max-width: 300px;
+      margin-bottom: 40px;
+      border: 1px solid green;
+      border-left: 0.4rem solid green;
+      border-radius: 0.6rem;
+      padding: 10px;
+      font-size:
+        13px;
+      line-height: 21px;
+      font-family: Inter, sans-serif;
+    }
+    /*.resend {*/
+    /*  font-size: 14px;*/
+    /*  margin-top: 30px;*/
+    /*  !*outline: 1px solid white;*!*/
+    /*}*/
+    .resend {
+      /*outline: 1px solid #8176FB;*/
+      /*color: #8176FB;*/
+      color: var(--main-color-2);
+      background-color: white;
+      outline: 1px solid var(--main-color-2);
+      padding: 10px;
+      border-radius: 10px;
+      width: 245px;
+      text-align: center;
+      margin-top: 50px;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+
+    }
+    .resend:hover {
+      /*background-color: var(--main-color-hover);*/
+    }
+    .validation-code-input:focus-visible {
+      /*border: none;*/
+      outline: solid 1px var(--main-color-4) !important;
+      border: solid 1px var(--main-color-4) !important;
+    }
+    .correct-code, .correct-code:focus-visible {
+      outline: solid 1px green !important;
+      border: solid 1px green !important;
+    }
+    .incorrect-code, .incorrect-code:focus-visible {
+      outline: solid 1px red !important;
+      border: solid 1px red !important;
+    }
+    .alert-wrong-code {
+      color: red;
+      margin-top: 20px;
+      text-align: center;
+    }
+    .footer {
+      margin-top: 30px;
+      margin-bottom: 30px;
+      font-size: 12px;
+    }
+  }
+}
+
+.spinner {
+  padding: 0 !important;
+  display: flex;
+  justify-content: center;
+  width: 265px !important;
+}
+.spinner:hover {
+  /*background-color: var(--main-color) !important*/
+}
