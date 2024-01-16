@@ -52,6 +52,7 @@ export class KinetoTrackerComponent implements OnInit{
     { name: 'Raluca'},
     { name: 'Catalina'}];
 editAppointmentDialogContainerHeight: string = '0';
+hideTodayApp: boolean = false;
 
   constructor(private messageService: MessageService, private appointmentService : AppointmentService) {
     this.containerWidth = window.innerWidth;
@@ -177,12 +178,15 @@ editAppointmentDialogContainerHeight: string = '0';
   toggleEditAppointment(appointment: Appointment) {
     this.editAppointmentDialog = !this.editAppointmentDialog;
     if(!this.editAppointmentDialog) {
+      this.hideTodayApp = false;
       this.editAppointmentDialogContainerHeight = '0';
       this.selectedAppointment = undefined;
     
     }
     else {
-      this.scrollContainer.nativeElement.scrollIntoView({ behavior: "smooth", block: "start" });
+      if(this.containerWidth < 576) {
+        this.hideTodayApp = true;
+      } 
       this.selectedAppointment = appointment;
       this.selectedTitle = appointment.title
       // this.selectedTrainer = new Trainer();
@@ -224,6 +228,7 @@ editAppointmentDialogContainerHeight: string = '0';
   }
   closeEditAppointmentModal() {
     this.editAppointmentDialog = false;
+    this.hideTodayApp = false;
   
   }
   getAppointmentsByDay(day: string): Appointment[] {

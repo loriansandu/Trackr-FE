@@ -56,7 +56,7 @@
             </div>
         </div>
     </p-card>
-    <p-card *ngIf="appointments.length != 0" class="col-12 lg:col-6 xl:col-6 mt-1 sm:mt-0 today-appointments" styleClass="sm:shadow-3">
+    <p-card *ngIf="appointments.length != 0 && !hideTodayApp" class="col-12 lg:col-6 xl:col-6 mt-1 sm:mt-0 today-appointments" styleClass="sm:shadow-3">
             <ng-template pTemplate="header">
                 <div *ngIf="isToday(selectedDate)" class="text-xl sm:text-2xl">Today</div>
                 <div *ngIf="!isToday(selectedDate)" class="text-xl sm:text-2xl">{{selectedDate.toLocaleDateString()}} </div>
@@ -110,7 +110,7 @@
             </div>
         </div>
     </p-card>
-    <p-dialog [draggable]=false (onHide)="closeEditAppointmentModal()" [(visible)]="editAppointmentDialog" position="bottomright" class="col-12 lg:col-6 xl:col-6 mt-5 sm:mt-0 border-round"  styleClass="change-event-modal-container">
+    <p-dialog [draggable]=false (onHide)="closeEditAppointmentModal()" [(visible)]="editAppointmentDialog" position="bottomright" class="col-12 lg:col-6 xl:col-6 mt-0 sm:mt-0 border-round"  styleClass="change-event-modal-container">
         <p-header class="flex align-items-center justify-content-between w-full">
             <span #scrollContainer class="text-base">Edit appointment </span>
             <i pButton class="pi pi-check mr-4 confirm-edit-appointment"  (click)="editAppointment()"></i>

@@ -54,6 +54,10 @@
     :host /deep/.p-card-header {
         color: var(--main-color-4);
     }
+    :host /deep/.p-card-content {
+        padding-bottom: 0;
+    }
+
 }
 
 :host /deep/ .card-events-container {
