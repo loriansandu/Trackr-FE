@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {MenuItem, MessageService} from "primeng/api";
 import { AppointmentService } from 'src/app/services/appointment/appointment.service';
 import Appointment, { Status } from './create-appointment/appointment';
@@ -13,6 +13,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class KinetoTrackerComponent implements OnInit{
 
+  @ViewChild('scrollContainer') scrollContainer!: ElementRef;
   selectedTrainer: Trainer | undefined;
   selectedTitle!: string;
   dates: any;
@@ -50,6 +51,7 @@ export class KinetoTrackerComponent implements OnInit{
     { name: 'Daniel'},
     { name: 'Raluca'},
     { name: 'Catalina'}];
+editAppointmentDialogContainerHeight: string = '0';
 
   constructor(private messageService: MessageService, private appointmentService : AppointmentService) {
     this.containerWidth = window.innerWidth;
@@ -175,16 +177,23 @@ export class KinetoTrackerComponent implements OnInit{
   toggleEditAppointment(appointment: Appointment) {
     this.editAppointmentDialog = !this.editAppointmentDialog;
     if(!this.editAppointmentDialog) {
+      this.editAppointmentDialogContainerHeight = '0';
       this.selectedAppointment = undefined;
+    
     }
     else {
+      this.editAppointmentDialogContainerHeight = '300px';
+      setTimeout(() => {
+        console.log('After 0.5 seconds delay');
+        this.scrollContainer.nativeElement.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 500);
       this.selectedAppointment = appointment;
       this.selectedTitle = appointment.title
       // this.selectedTrainer = new Trainer();
       // this.selectedTrainer.name = appointment.trainer;
       this.selectedDate = appointment.date;
       this.selectedHour = appointment.hour;
-      this.selectedMinute = appointment.minute;    
+      this.selectedMinute = appointment.minute;
     }
   }
 

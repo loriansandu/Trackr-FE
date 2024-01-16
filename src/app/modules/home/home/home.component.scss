@@ -110,6 +110,7 @@ $transitionDuration:.2s;        /* transition duration of layout elements e.g. s
       overflow-x: hidden;
       padding: 0;
       min-height: unset;
+      height: fit-content;
     }
 
     .layout-sidebar {

@@ -110,32 +110,35 @@
             </div>
         </div>
     </p-card>
-    <p-dialog  [draggable]=false (onHide)="closeEditAppointmentModal()" [(visible)]="editAppointmentDialog" position="bottomright" class="col-12 lg:col-6 xl:col-6 mt-5 sm:mt-0 border-round"  styleClass="change-event-modal-container">
-        <p-header class="flex align-items-center justify-content-between w-full">
-            <span>Edit appointment </span>
-            <i pButton class="pi pi-check mr-4 confirm-edit-appointment"  (click)="editAppointment()"></i>
-        </p-header>
-        <div class="grid mt-1">
-            <div class="col-12 h-5rem time-picker-container">
-                <!-- <div class="time-picker-1">
-                    <app-time-picker class="appointment-time-picker w-full" [selectedHour]="selectedHour" [selectedMinute]="selectedMinute" (emitHourValueToParent)="setSelectedHour($event)" (emitMinuteValueToParent)="setSelectedMinute($event)"></app-time-picker>
-                </div> -->
-                <div class="p-inputgroup w-full mb-7 sm:mb-8 fadeindown animation-duration-200">
-                    <span class="p-inputgroup-addon">
-                        <i class="pi pi-clock"></i>
-                    </span>
-                    <app-time-picker class="appointment-time-picker w-full" [selectedHour]="selectedHour" [selectedMinute]="selectedMinute" (emitHourValueToParent)="setSelectedHour($event)" (emitMinuteValueToParent)="setSelectedMinute($event)"></app-time-picker>
-            <!--        <p-calendar  placeholder="Select the hour" [(ngModel)]="appointmentsHour" class="w-full" styleClass="w-full" [readonlyInput]="true" [timeOnly]="true" [showTime]="true" [showSeconds]="false" [hourFormat]="'24'"></p-calendar>-->
+    <div #scrollContainer class="w-full" [style.height]="editAppointmentDialogContainerHeight">
+        <p-dialog  [draggable]=false (onHide)="closeEditAppointmentModal()" [(visible)]="editAppointmentDialog" position="bottomright" class="col-12 lg:col-6 xl:col-6 mt-5 sm:mt-0 border-round"  styleClass="change-event-modal-container">
+            <p-header class="flex align-items-center justify-content-between w-full">
+                <span>Edit appointment </span>
+                <i pButton class="pi pi-check mr-4 confirm-edit-appointment"  (click)="editAppointment()"></i>
+            </p-header>
+            <div class="grid mt-1">
+                <div class="col-12 h-5rem time-picker-container">
+                    <!-- <div class="time-picker-1">
+                        <app-time-picker class="appointment-time-picker w-full" [selectedHour]="selectedHour" [selectedMinute]="selectedMinute" (emitHourValueToParent)="setSelectedHour($event)" (emitMinuteValueToParent)="setSelectedMinute($event)"></app-time-picker>
+                    </div> -->
+                    <div class="p-inputgroup w-full mb-7 sm:mb-8 fadeindown animation-duration-200">
+                        <span class="p-inputgroup-addon">
+                            <i class="pi pi-clock"></i>
+                        </span>
+                        <app-time-picker class="appointment-time-picker w-full" [selectedHour]="selectedHour" [selectedMinute]="selectedMinute" (emitHourValueToParent)="setSelectedHour($event)" (emitMinuteValueToParent)="setSelectedMinute($event)"></app-time-picker>
+                <!--        <p-calendar  placeholder="Select the hour" [(ngModel)]="appointmentsHour" class="w-full" styleClass="w-full" [readonlyInput]="true" [timeOnly]="true" [showTime]="true" [showSeconds]="false" [hourFormat]="'24'"></p-calendar>-->
+                      </div>
+                </div>
+                <div class="col-4 p-inputgroup" *ngIf="selectedAppointment">
+                    <input pInputText placeholder="Title" [(ngModel)]="selectedTitle"/>
                   </div>
+                <div class="col-8 p-inputgroup" *ngIf="selectedAppointment">
+                    <p-dropdown (onChange)="changeTrainer(selectedAppointment)"  [options]="trainers" [(ngModel)]="selectedTrainer" optionLabel="name" [placeholder]="selectedTrainer?.name" styleClass="w-full"></p-dropdown>
+                </div>
             </div>
-            <div class="col-4 p-inputgroup" *ngIf="selectedAppointment">
-                <input pInputText placeholder="Title" [(ngModel)]="selectedTitle"/>
-              </div>
-            <div class="col-8 p-inputgroup" *ngIf="selectedAppointment">
-                <p-dropdown (onChange)="changeTrainer(selectedAppointment)"  [options]="trainers" [(ngModel)]="selectedTrainer" optionLabel="name" [placeholder]="selectedTrainer?.name" styleClass="w-full"></p-dropdown>
-            </div>
-        </div>
-    </p-dialog>
+        </p-dialog>
+    </div>
+
 </div>
 <div class="menu-title" *ngIf="containerWidth < 576">
     <div class="month">
