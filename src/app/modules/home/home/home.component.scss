@@ -107,10 +107,11 @@ $transitionDuration:.2s;        /* transition duration of layout elements e.g. s
       // padding: 9rem 0rem 0rem 0rem;
       position: absolute;
       top: 133px;
-      overflow-x: hidden;
+      overflow-y: auto;
       padding: 0;
       min-height: unset;
-      height: fit-content;
+      // overflow-x: hidden;
+      // height: fit-content;
     }
 
     .layout-sidebar {

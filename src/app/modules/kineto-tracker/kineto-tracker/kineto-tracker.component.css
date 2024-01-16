@@ -44,8 +44,7 @@
 
 @media (max-width: 991px) {
     :host /deep/ .week-events {
-        /* max-height: 400px; */
-        max-height: unset!important;
+        max-height: 400px;
         overflow: auto;
         padding: 20px;
     }
