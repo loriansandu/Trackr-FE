@@ -19,7 +19,7 @@ $transitionDuration:.2s;        /* transition duration of layout elements e.g. s
   position: fixed;
   width: 250px;
   height: calc(100vh - 9rem);
-  z-index: 999;
+  z-index: 99999;
   overflow-y: auto;
   user-select: none;
   top: 7rem;
@@ -104,8 +104,12 @@ $transitionDuration:.2s;        /* transition duration of layout elements e.g. s
     .layout-main-container {
       margin-left: 0;
       //padding-left: 2rem;
-      padding: 9rem 0rem 0rem 0rem;
+      // padding: 9rem 0rem 0rem 0rem;
+      position: absolute;
+      top: 133px;
       overflow-x: hidden;
+      padding: 0;
+      min-height: unset;
     }
 
     .layout-sidebar {

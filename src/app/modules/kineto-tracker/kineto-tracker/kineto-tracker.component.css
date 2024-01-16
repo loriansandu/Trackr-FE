@@ -42,6 +42,14 @@
     padding: 20px;
 }
 
+@media (max-width: 991px) {
+    :host /deep/ .week-events {
+        max-height: 400px;
+        overflow: auto;
+        padding: 20px;
+    }
+}
+
 :host /deep/ .card-events-container {
     display: grid;
     row-gap: 10px;
@@ -57,7 +65,7 @@
         }
     }
     .container {
-        margin-bottom: 0.rem!important;
+        /* margin-bottom: 0.rem!important; */
         /* background: whitesmoke; */
         .button {
             width: 40px;
