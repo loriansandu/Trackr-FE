@@ -1,5 +1,5 @@
 {
-    "window.zoomLevel": 0,
+    "window.zoomLevel": -1,
     "editor.minimap.enabled": false,
     "workbench.tree.indent": 15,
     "workbench.colorTheme": "Tokyo Night Storm",

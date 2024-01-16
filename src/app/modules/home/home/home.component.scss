@@ -19,7 +19,7 @@ $transitionDuration:.2s;        /* transition duration of layout elements e.g. s
   position: fixed;
   width: 250px;
   height: calc(100vh - 9rem);
-  z-index: 99999;
+  z-index: 1000;
   overflow-y: auto;
   user-select: none;
   top: 7rem;

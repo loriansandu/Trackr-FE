@@ -227,6 +227,25 @@ export class KinetoTrackerComponent implements OnInit{
       return getDayNameFromDate(appointment.date) === day;
     });
   }
-
+  getColorForDay(dayOfWeek: string): string {
+    switch (dayOfWeek) {
+      case 'Monday': // Sunday
+        return 'var(--mint-green)'; // Red
+      case 'Tuesday': // Monday
+        return 'var(--tiffany-blue)'; // Orange
+      case 'Wednesday': // Tuesday
+        return 'var(--munsell-blue)'; // Yellow
+      case 'Thursday': // Wednesday
+        return 'var(--prussian-blue)'; // Green
+      case 'Friday': // Thursday
+        return 'var(--midnight-green)'; // Blue
+      case 'Saturday': // Friday
+        return '#4B0082'; // Indigo
+      case 'Sunday': // Saturday
+        return '#9400D3'; // Violet
+      default:
+        return '#000000'; // Black (default)
+    }
+  }
 }
 
