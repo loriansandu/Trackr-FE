@@ -1,4 +1,4 @@
-.profile-image-container {
+:host /deep/ .profile-image-container {
 
   .p-button-label {
     font-weight: 500;
@@ -40,7 +40,7 @@
     border-radius: 10px;
   }
 }
-.general-info-container {
+:host /deep/ .general-info-container {
   .p-card-title {
     color: var(--main-color-2);
     font-family: var(--font-family);
@@ -68,7 +68,7 @@
     border-color: var(--main-color-4);
   }
 }
-.security-info-container {
+:host /deep/ .security-info-container {
   .p-button-label {
     font-weight: 500;
   }

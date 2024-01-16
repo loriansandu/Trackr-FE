@@ -5,6 +5,8 @@
   </div>
   <div class="alert-error" [@fadeInOut]="invalidEmail ? 'in' : 'void'" *ngIf="invalidEmail">An account with this email address already exists.
     Please try again.</div>
+  <div class="alert-error" [@fadeInOut]="loginWithGoogleFailed ? 'in' : 'void'" *ngIf="loginWithGoogleFailed">Authentication error.
+    Could not login with Google. Please try again.</div>  
   <form [formGroup]="authForm" (ngSubmit)="onSubmit()" class="auth-form" autocomplete="off">
     <label class="email-form-field" for="email" [ngClass]="getEmailError() !='' && isEmailInvalid? 'error-form-field' : ''">
       <input

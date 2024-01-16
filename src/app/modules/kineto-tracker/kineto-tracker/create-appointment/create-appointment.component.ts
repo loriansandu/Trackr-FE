@@ -39,7 +39,6 @@ export class CreateAppointmentComponent implements OnChanges{
       }
       ,
         (error) => {
-          console.log(error);
         }
       )
     }
@@ -162,14 +161,12 @@ export class CreateAppointmentComponent implements OnChanges{
 
   sendAppointments(appointments: Appointment[], index: number = 0) {
     if (index < appointments.length) {
-      console.log(appointments[index]);
       this.appointmentService.createAppointment(appointments[index]).subscribe(
         (response) => {
           this.dialogError = {};
           this.sendAppointments(appointments, index + 1);
         },
         (error) => {
-          console.log(error);
           this.appointmentsCreated.emit(false);
           this.dialogError.error = 'Something went wrong, please try again';
           return;

@@ -29,6 +29,9 @@ import {Subscription} from "rxjs";
     ])]
 })
 export class LoginComponent implements OnInit, OnDestroy{
+redirectToGithub() {
+  window.open('https://github.com/loriansandu/FileShare', '_blank')
+}
 
   isLoggedIn?: boolean;
   browserName!: string;
@@ -133,11 +136,9 @@ export class LoginComponent implements OnInit, OnDestroy{
     this.loading = true;
     this.authService.login(this.authForm.value.email, this.authForm.value.password).subscribe(
       () => {
-        console.log('Login successful');
       },
       (error : HttpErrorResponse) => {
         this.loading = false;
-        console.error('Login failed', error);
         if(error.error.message === 'Account not verified') {
           this.verifyCodePage = true;
         }
@@ -148,12 +149,12 @@ export class LoginComponent implements OnInit, OnDestroy{
   }
 
   onLoginWithGoogle(idToken: string) {
+    this.loading = true;
     this.authService.loginWithGoogle(idToken).subscribe(
       () => {
-        console.log('Login successful');
+        this.loading = false;
       },
       (error : HttpErrorResponse) => {
-        console.error('Login failed', error);
         this.loginWithGoogleFailed = true;
       }
     );
@@ -162,12 +163,10 @@ export class LoginComponent implements OnInit, OnDestroy{
     this.resetPasswordLoading = true;
     this.authService.resetPassword(this.resetPasswordForm.value.email).subscribe(
       () => {
-        console.log('Password reset successful');
         this.resetPasswordLoading = this.resetPasswordPage = false;
         this.successfulReset = true;
       },
       (error: HttpErrorResponse) => {
-        console.error('Eroare', error);
         this.resetPasswordLoading = false;
         this.error = error.error.message === null;
         this.doesntExistEmail = error.error.message == 'Wrong email';

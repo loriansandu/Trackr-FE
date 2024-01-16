@@ -89,7 +89,6 @@ export class ProfileComponent implements OnInit, OnDestroy{
         this.lastName = user.lastName;
       },
       (error) => {
-        console.error('Error fetching user info:', error);
       }
     );
   }
@@ -156,7 +155,6 @@ export class ProfileComponent implements OnInit, OnDestroy{
               this.changeNumberDialogVisible = false;
             },
             (error) => {
-              console.log(error)
               this.updateNumberLoading = false;
               this.messageService.add({
                 severity: 'error',
@@ -174,7 +172,6 @@ export class ProfileComponent implements OnInit, OnDestroy{
       this.userService.uploadProfilePicture(formData).subscribe(
           {
             next : (response) => {
-              console.log(response)
               this.updateImageLoading = false;
               this.setCurrentProfileImage(this.selectedFile);
               this.messageService.add({
@@ -309,7 +306,6 @@ export class ProfileComponent implements OnInit, OnDestroy{
     this.userService.removeProfilePicture().subscribe(
         {
           next : (response) => {
-            console.log(response)
             if (this.userInfo) {
               this.userInfo.profilePicture = null;
             }
@@ -322,7 +318,6 @@ export class ProfileComponent implements OnInit, OnDestroy{
 
           },
           error : (error) => {
-            console.log(error)
             this.messageService.add({
               severity: 'error',
               summary: error,

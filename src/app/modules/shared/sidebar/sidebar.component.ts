@@ -13,26 +13,26 @@ export class SidebarComponent implements OnInit{
 
   ngOnInit() {
     this.model = [
-      {
-        label: 'Home',
-        icon: 'pi pi-home',
-        routerLink: ['']
-      },
-      {
-        label: 'Vehicle',
-        icon: 'pi pi-car',
-        routerLink: ['/vehicle']
-      },
+      // {
+      //   label: 'Home',
+      //   icon: 'pi pi-home',
+      //   routerLink: ['']
+      // },
       {
         label: 'Kineto',
         icon: 'fa-solid fa-person-running',
         routerLink: ['/kineto']
       },
-      {
-        label: 'Gym',
-        icon: 'fa fa-dumbbell',
-        routerLink: ['/gym']
-      }
+      // {
+      //   label: 'Vehicle',
+      //   icon: 'pi pi-car',
+      //   routerLink: ['/vehicle']
+      // },
+      // {
+      //   label: 'Gym',
+      //   icon: 'fa fa-dumbbell',
+      //   routerLink: ['/gym']
+      // }
     ];
   }
 }

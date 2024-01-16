@@ -77,7 +77,6 @@ export class KinetoTrackerComponent implements OnInit{
         });
       },
       (error) => {
-        console.log(error);
       });
   }
 
@@ -98,7 +97,6 @@ export class KinetoTrackerComponent implements OnInit{
         });
       },
       (error) => {
-        console.log(error);
       });
   }
 
@@ -121,7 +119,6 @@ export class KinetoTrackerComponent implements OnInit{
         this.getSelectedWeekAppointments();
       },
       (error : HttpErrorResponse) => {
-        console.log(error);
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
@@ -203,7 +200,6 @@ export class KinetoTrackerComponent implements OnInit{
         this.getSelectedWeekAppointments();
       },
       (error : HttpErrorResponse) => {
-        console.log(error);
         this.messageService.add({
           severity: 'error',
           summary: 'Error',

@@ -34,7 +34,7 @@ export class AuthService{
         sessionStorage.setItem("token", res.token);
         this.authenticated = true;
         this.register = false;
-        this.router.navigateByUrl("/").then(() => {});
+        this.router.navigateByUrl("/kineto").then(() => {});
       }),
       catchError((err: HttpErrorResponse) => {
         return throwError(err);
@@ -51,10 +51,9 @@ export class AuthService{
         return throwError(err);
       }),
       tap((res: any) => {
-        // console.log(res)
         sessionStorage.setItem("token", res.token);
         this.authenticated = true;
-        this.router.navigateByUrl("/").then(() => {});
+        this.router.navigateByUrl("/kineto").then(() => {});
       })
     );
   }

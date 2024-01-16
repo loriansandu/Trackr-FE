@@ -35,7 +35,6 @@ export class VerifyAccountComponent implements OnInit{
 
     this.authService.sendVerificationCode(code, this.email).subscribe(
       () => {
-        console.log('Validation successful');
         this.correctCode = true;
         inputCodeBoxes.forEach(box => {
           box.classList.add('correct-code');
@@ -45,7 +44,6 @@ export class VerifyAccountComponent implements OnInit{
         }, 1000);
       },
       (error : HttpErrorResponse) => {
-        console.error('Code verification failed', error);
         this.correctCode = false;
         inputCodeBoxes.forEach(box => {
           box.classList.add('incorrect-code');
@@ -60,11 +58,9 @@ export class VerifyAccountComponent implements OnInit{
       () => {
         this.resentCode = notification;
         this.loading = false
-        console.log('Code sent to email');
       },
       (error) => {
         this.loading = false
-        console.error('Could not send new code', error);
       }
     );
   }

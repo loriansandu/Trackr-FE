@@ -233,4 +233,29 @@ input:-webkit-autofill:focus {
   justify-content: center;
 }
 
+.credits {
+  position: absolute;
+  top: 30px;
+  right: 10em;
+  display: flex;
+  align-items:center;
+  .credits-text {
+    width: fit-content;
+    margin-right: 10px;
+  }
+  i {
+    font-size: 30px;
+  }
+}
+
+@media(max-width: 768px) {
+  .credits {
+    margin-top: 10px;
+    top: 70px;
+    /*width: 100%;*/
+    right: unset;
+    left: 10%;
+    font-size: smaller;
+  }
+}
 

@@ -36,13 +36,13 @@
     color: var(--main-color-1);
 }
 
-.week-events {
+:host /deep/ .week-events {
     max-height: 280px;
     overflow: auto;
     padding: 20px;
 }
 
-.card-events-container {
+:host /deep/ .card-events-container {
     display: grid;
     row-gap: 20px;
     .day-container {
@@ -99,7 +99,7 @@
     height: 10px!important;
     margin-right: 20px;
 }
-.speed-dial {
+:host /deep/.speed-dial {
     position: fixed;
     bottom: 30px; /* Adjust as needed to control vertical placement */
     right: 30px; /* Adjust as needed to control horizontal placement */
@@ -109,7 +109,7 @@
         box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--main-color-1), 0 1px 2px 0 black;
     }
     .p-speeddial-action {
-        height: 80px;
+        height: 80px!important;
         width: 80px;
     }
     .p-speeddial-button {
@@ -120,7 +120,7 @@
 }
 
 
-.custom-toast .ui-toast {
+:host /deep/ .custom-toast .ui-toast {
     position: fixed;
     top: 20%;
     left: 50%;
@@ -183,7 +183,7 @@
     }
 } */
 
-.appointment-time-picker {
+:host /deep/ .appointment-time-picker {
     color: #495057;
     background: #ffffff;
     border: 1px solid #ced4da;
@@ -198,8 +198,8 @@
     overflow: auto;
 }
 
-.today-appointments {
-    min-height: 300px!important;
+:host /deep/ .today-appointments {
+    min-height: 417px!important;
 }
 
 :host /deep/ .p-inputtext:enabled:focus, :host /deep/ .p-dropdown:focus, :host /deep/ .p-focus   {
@@ -219,11 +219,11 @@
     width: 100%;
 }
 
-.confirm-edit-appointment {
+:host /deep/ .confirm-edit-appointment {
     background-color: var(--main-color-1);
     border-color: var(--main-color-1);
 }
 
-.modal-header {
+:host /deep/ .modal-header {
     border-radius: 10px;
 }

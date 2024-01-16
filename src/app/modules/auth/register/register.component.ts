@@ -55,6 +55,7 @@ export class RegisterComponent implements OnInit{
   error: boolean = false;
   resetPasswordPage: boolean = false;
   authSubscription!: Subscription;
+  loginWithGoogleFailed: boolean = false;
 
   ngOnInit(): void {
     this.authSubscription = this.socialAuthService.authState.subscribe(
@@ -84,12 +85,10 @@ export class RegisterComponent implements OnInit{
     this.loading = true;
     this.authService.signUp(this.authForm.value.email, this.authForm.value.password).subscribe(
       () => {
-        console.log('Registration successful');
         this.verifyCodePage = true;
       },
       (error : HttpErrorResponse) => {
         this.loading = false;
-        console.error('Registration failed', error);
         this.error = error.error.message === null
         this.invalidEmail = error.error.message == 'Email already exists'
       }
@@ -145,11 +144,10 @@ export class RegisterComponent implements OnInit{
   onLoginWithGoogle(idToken: string) {
     this.authService.loginWithGoogle(idToken).subscribe(
         () => {
-          console.log('Login successful');
+ 
         },
         (error : HttpErrorResponse) => {
-          console.error('Login failed', error);
-          // this.loginWithGoogleFailed = true;
+          this.loginWithGoogleFailed = true;
         }
     );
   }
