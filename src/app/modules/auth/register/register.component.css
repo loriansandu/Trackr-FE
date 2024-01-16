@@ -203,3 +203,17 @@ input:-webkit-autofill:focus {
 .spinner:hover {
   background-color: var(--main-color-2) !important
 }
+.credits {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  align-items:center;
+  .credits-text {
+    width: fit-content;
+    margin-right: 10px;
+  }
+  i {
+    font-size: 30px;
+  }
+}

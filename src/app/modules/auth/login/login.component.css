@@ -235,8 +235,8 @@ input:-webkit-autofill:focus {
 
 .credits {
   position: absolute;
-  top: 30px;
-  right: 10em;
+  top: 10px;
+  left: 10px;
   display: flex;
   align-items:center;
   .credits-text {
@@ -248,14 +248,14 @@ input:-webkit-autofill:focus {
   }
 }
 
-@media(max-width: 768px) {
+/* @media(max-width: 768px) {
   .credits {
     margin-top: 10px;
     top: 70px;
-    /*width: 100%;*/
+    //width: 100%;
     right: unset;
     left: 10%;
     font-size: smaller;
   }
-}
+} */
 

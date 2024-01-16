@@ -70,3 +70,9 @@
   </div>
 </div >
 <app-verify-account *ngIf="verifyCodePage" email="{{authForm.value.email}}" (triggerCorrectCode)="redirectToLoginPage()"></app-verify-account>
+<div class="credits">
+  <div class="credits-text">
+    App developed by Lorian Sandu
+  </div>
+  <i class="pi pi-github" style="color: var(--main-color-1); cursor:pointer" (click)="redirectToGithub()"></i>
+</div>

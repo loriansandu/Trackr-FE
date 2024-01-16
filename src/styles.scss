@@ -15,8 +15,9 @@
   --main-color-5: #867E4C;
   --focus-ring: 0 0 0 0.1rem var(--main-color-2) !important;
   /*--surface-hover : var(--main-color-outline-light) !important;*/
-  --font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol" !important;
+  // --font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol" !important;
   --border-radius: 8px!important;
+  --font-family: 'DM Sans', sans-serif;
 }
 @media screen and (max-width: 767px) {
   input, select, textarea {

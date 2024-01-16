@@ -50,7 +50,7 @@ export function getWeekRange(selectedDate: Date): { firstDay: Date; lastDay: Dat
   const startDate = new Date(currentDate);
   const endDate = new Date(currentDate);
   startDate.setDate(currentDate.getDate() - dayOfWeek);
-  endDate.setDate(startDate.getDate() + 6 );
+  endDate.setDate(currentDate.getDate() + (6 - dayOfWeek));
   return {
     firstDay: startDate,
     lastDay: endDate,

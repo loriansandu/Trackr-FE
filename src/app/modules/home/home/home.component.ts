@@ -149,9 +149,11 @@ export class HomeComponent implements OnInit{
   handleRouteChange() {
     this.currentRoute = this.router.url;
     let today = new Date();
-    const monthText = this.datePipe.transform(today, 'MMMM');
+    let monthText = this.datePipe.transform(today, 'MMMM');
     if (monthText != null) {
-      this.router.url === '/kineto' && this.isNarrowScreen? this.menuTitle = `${monthText}, ${today.getFullYear()}` : this.menuTitle = 'Trackr.';
+      // this.router.url === '/kineto' && this.isNarrowScreen? this.menuTitle = `${monthText}, ${today.getFullYear()}` : this.menuTitle = 'Trackr.';
+      this.router.url === '/kineto' && this.isNarrowScreen? this.menuTitle = '' : this.menuTitle = 'Trackr.';
+    
     }
   }
 }

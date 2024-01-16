@@ -44,17 +44,20 @@
 
 :host /deep/ .card-events-container {
     display: grid;
-    row-gap: 20px;
+    row-gap: 10px;
+    padding: 0!important;
+    overflow-x: hidden;
     .day-container {
-        background: whitesmoke;
-        padding: 10px;
+        /* background: whitesmoke; */
+        padding: 0 10px;
 
         .day-name {
-            margin-bottom: 1.5rem;
-            color : #DC9D7D;
+            margin-bottom: 0.5rem;
+            /* color : #DC9D7D; */
         }
     }
     .container {
+        margin-bottom: 0.rem!important;
         /* background: whitesmoke; */
         .button {
             width: 40px;
@@ -199,7 +202,7 @@
 }
 
 :host /deep/ .today-appointments {
-    min-height: 417px!important;
+    min-height: 300px!important;
 }
 
 :host /deep/ .p-inputtext:enabled:focus, :host /deep/ .p-dropdown:focus, :host /deep/ .p-focus   {
@@ -226,4 +229,15 @@
 
 :host /deep/ .modal-header {
     border-radius: 10px;
+}
+
+.menu-title {
+    position: fixed;
+    z-index: 9999;
+    top: 27px;
+    left: 35%;
+    font-size: 1.5rem;
+    font-weight: 500;
+    display: flex;
+
 }

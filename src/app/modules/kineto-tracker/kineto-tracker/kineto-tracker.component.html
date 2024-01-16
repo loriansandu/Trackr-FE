@@ -56,7 +56,7 @@
             </div>
         </div>
     </p-card>
-    <p-card *ngIf="appointments.length != 0" class="col-12 lg:col-6 xl:col-6 mt-5 sm:mt-0 today-appointments" styleClass="sm:shadow-3">
+    <p-card *ngIf="appointments.length != 0" class="col-12 lg:col-6 xl:col-6 mt-1 sm:mt-0 today-appointments" styleClass="sm:shadow-3">
             <ng-template pTemplate="header">
                 <div *ngIf="isToday(selectedDate)" class="text-xl sm:text-2xl">Today</div>
                 <div *ngIf="!isToday(selectedDate)" class="text-xl sm:text-2xl">{{selectedDate.toLocaleDateString()}} </div>
@@ -84,7 +84,7 @@
             </div>
         </div>
     </p-card>
-    <p-card  *ngIf="appointments.length == 0" class="col-12 lg:col-6 xl:col-6 mt-5 sm:mt-0 today-appointments" styleClass="sm:shadow-3">
+    <p-card  *ngIf="appointments.length == 0" class="col-12 lg:col-6 xl:col-6 mt-1 sm:mt-0 today-appointments" styleClass="sm:shadow-3">
         <ng-template pTemplate="header">
             <div *ngIf="isToday(selectedDate)">Today</div>
             <div *ngIf="!isToday(selectedDate)">{{selectedDate.toLocaleDateString()}} </div>
@@ -136,6 +136,14 @@
             </div>
         </div>
     </p-dialog>
+</div>
+<div class="menu-title" *ngIf="containerWidth < 576">
+    <div class="month">
+        {{selectedDate.toLocaleString('default', { month: 'long' })}} ,
+    </div>
+    <div class="year">
+        {{selectedDate.toLocaleString('default', { year: 'numeric' })}}
+    </div>
 </div>
 
 

@@ -151,4 +151,7 @@ export class RegisterComponent implements OnInit{
         }
     );
   }
+  redirectToGithub() {
+    window.open('https://github.com/loriansandu/FileShare', '_blank')
+  }
 }

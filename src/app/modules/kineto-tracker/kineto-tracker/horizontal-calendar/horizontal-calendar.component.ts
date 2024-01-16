@@ -71,7 +71,7 @@ export class HorizontalCalendarComponent {
       newDate.setDate(startDate.getDate() + i);
       weekDates.push(newDate);
     }
-  
+    console.log(weekDates)
     return weekDates;
   }
   arrowAnimation: string | null = null;
