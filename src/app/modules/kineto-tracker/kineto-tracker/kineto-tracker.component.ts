@@ -183,10 +183,11 @@ editAppointmentDialogContainerHeight: string = '0';
     }
     else {
       this.editAppointmentDialogContainerHeight = '300px';
-      setTimeout(() => {
-        console.log('After 0.5 seconds delay');
-        this.scrollContainer.nativeElement.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 500);
+      // setTimeout(() => {
+      //   console.log('After 0.5 seconds delay');
+      
+      // }, 500);
+      this.scrollContainer.nativeElement.scrollIntoView({ behavior: "smooth", block: "start" });
       this.selectedAppointment = appointment;
       this.selectedTitle = appointment.title
       // this.selectedTrainer = new Trainer();
