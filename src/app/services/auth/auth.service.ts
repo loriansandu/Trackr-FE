@@ -111,7 +111,7 @@ export class AuthService{
       const tokenValidation$ = this.http.get(environment.apiUrl + "/api/auth/validate").pipe(
         tap(() => {
           this.authenticated = true;
-
+        
         }),
         catchError((err: any) => {
           // this.logout();
