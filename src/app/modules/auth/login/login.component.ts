@@ -30,7 +30,7 @@ import {Subscription} from "rxjs";
 })
 export class LoginComponent implements OnInit, OnDestroy{
 redirectToGithub() {
-  window.open('https://github.com/loriansandu/FileShare', '_blank')
+  window.open('https://github.com/loriansandu/Trackr.', '_blank')
 }
 
   isLoggedIn?: boolean;
