@@ -27,7 +27,6 @@ import { Trainer } from './Trainer';
 })
 export class CreateAppointmentComponent implements OnChanges{
 
-
   constructor(private appointmentService : AppointmentService) { }
 
   ngOnChanges() {
@@ -72,6 +71,7 @@ export class CreateAppointmentComponent implements OnChanges{
   remindersAsJson: string = "";
   getDayNameFromDate = getDayNameFromDate;
   formatDateToYYYYMMDD = formatDateToYYYYMMDD;
+  nextDialogLoading: boolean = false;
 
   onActiveIndexChange(event: number) {
     this.activeIndex = event;
@@ -79,6 +79,7 @@ export class CreateAppointmentComponent implements OnChanges{
 
   nextDialog() {
     if(this.activeIndex == 0) {
+      this.nextDialogLoading = true;
       if(this.selectedTrainer && this.numberOfAppointments) {
         this.activeIndex ++;
         this.dialogError = {};
@@ -96,8 +97,10 @@ export class CreateAppointmentComponent implements OnChanges{
       else {
         this.dialogError.error = 'Please complete all fields';
       }
+      this.nextDialogLoading = false;
     }
     else if (this.activeIndex == 1) {
+      this.nextDialogLoading = true;
       if(this.dates.length === this.numberOfAppointments) {
         for (let i = 0; i < this.appointments.length; i++) {
           const appointment = this.appointments[i];
@@ -116,11 +119,13 @@ export class CreateAppointmentComponent implements OnChanges{
           this.appointments[i].date.setSeconds(0);
           if (isToday(appointment.date) && !isHourAfterNow(`${this.appointments[i].hour}:${this.appointments[i].minute}`)) {
             this.dialogError.error = 'Please select an hour after the current time';
+            this.nextDialogLoading = false;
             return;
           }
         }
         this.appointmentService.checkDatesAreAvailable(this.appointments).subscribe( 
           (response) => {
+            this.nextDialogLoading = false;
             this.activeIndex++;
             this.dialogError = {};
             this.sortAppointmentsByDate(this.appointments);
@@ -129,6 +134,7 @@ export class CreateAppointmentComponent implements OnChanges{
           }
           ,
             (error) => {
+              this.nextDialogLoading = false;
               const dateArray : string[] = error.error.message.slice(1, -1).split(', ').map((date : any)  => date.replace(/,/g, ''));
               this.appointments.forEach((appointment) => {
                 if(dateArray.includes(`${appointment.date.toLocaleDateString()}`)) { 
@@ -155,6 +161,7 @@ export class CreateAppointmentComponent implements OnChanges{
       }
     }
     else {
+      this.nextDialogLoading = true;
       this.sendAppointments(this.appointments);
     }
   }
@@ -173,6 +180,7 @@ export class CreateAppointmentComponent implements OnChanges{
         }
       );
     } else {
+      this.nextDialogLoading = false;
       this.addAppointmentsModalVisible = false;
       this.hideModal();
       this.appointmentsCreated.emit(true);

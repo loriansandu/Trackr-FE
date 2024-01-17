@@ -29,8 +29,8 @@
         </div> -->
         <div class="card-events-container week-events text-sm p-0 sm:p-3">
             <div *ngFor="let day of daysOfWeek" class=" border-round" [ngClass]="getAppointmentsByDay(day).length !== 0 ? 'day-container' : 'hidden'">
-                <div class="day-name col-12 flex align-items-center font-bold" [style.color]="getColorForDay(day)">{{day}} </div>
-                <div class="container grid mb-4" *ngFor="let appointment of getAppointmentsByDay(day)">
+                <div class="day-name col-12 flex align-items-center font-bold" [style.color]="getColorForDay(day)">{{day}}</div>
+                <div class="container grid mb-4 cursor-pointer" *ngFor="let appointment of getAppointmentsByDay(day)" (click)="changeSelectedDay(appointment)">
                     <div class="col-2 grid grid-nogutter">
                         <div class="col-12 flex justify-content-center align-items-center" [ngClass]="appointment.status === finishedStatus ? 'event-time-finished' : appointment.status === ongoingStatus ? 'event-time-ongoing' : 'event-time-upcoming'" >{{appointment.hour}}:{{appointment.minute}} </div>
                         <div class="col-12 flex justify-content-center align-items-center" [ngClass]="appointment.status === finishedStatus ? 'event-time-finished' : appointment.status === ongoingStatus ? 'event-time-ongoing' : 'event-time-upcoming'" > -  </div>
@@ -113,7 +113,9 @@
     <p-dialog *ngIf="editAppointment"  [draggable]=false (onHide)="closeEditAppointmentModal()" [(visible)]="editAppointmentDialog" position="bottomright" class="col-12 lg:col-6 xl:col-6 mt-0 sm:mt-0 border-round"  styleClass="change-event-modal-container">
         <p-header class="flex align-items-center justify-content-between w-full">
             <span #scrollContainer class="text-base">Edit appointment </span>
-            <i pButton class="pi pi-check mr-4 confirm-edit-appointment"  (click)="editAppointment()"></i>
+            <i pButton [class]="!editAppointmentLoading ? 'pi pi-check' : ''" class="mr-4 confirm-edit-appointment"  (click)="editAppointment()">
+                <i *ngIf="editAppointmentLoading" class="pi pi-spin pi-spinner confirm-edit-appointment"></i>
+            </i>
         </p-header>
         <div class="grid mt-1">
             <div class="col-12 h-5rem time-picker-container">

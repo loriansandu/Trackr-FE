@@ -24,7 +24,7 @@
         <p-inputNumber [(ngModel)]="numberOfAppointments" inputId="minmax" mode="decimal" [min]="1" [max]="5" autocomplete="off" placeholder="Enter number of appointments"> </p-inputNumber>
       </div>
       <div class="w-full flex justify-content-center">
-        <p-button label="Continue" [outlined]="true" (onClick)="nextDialog()" class="w-5" styleClass="p-button-outlined p-button-secondary h-full w-full"></p-button>
+        <p-button label="Continue" [loading]="nextDialogLoading" [outlined]="true" (onClick)="nextDialog()" class="w-5" styleClass="p-button-outlined p-button-secondary h-full w-full"></p-button>
       </div>
     </div>
     <div *ngIf="activeIndex === 1" class="container date fadeindown animation-duration-200" [ngClass]="dialogError.error ? 'container-error' : ''">
@@ -61,7 +61,7 @@
         </p-accordion>
       </div>
       <div class="w-full flex justify-content-center" >
-        <p-button label="Continue" [outlined]="true" (onClick)="nextDialog()" class="w-5" styleClass="p-button-outlined p-button-secondary h-full w-full" [ngClass]="allAppointmentsSameHour ==='no' ? 'mb-7' : ''"></p-button>
+        <p-button label="Continue"  [loading]="nextDialogLoading" [outlined]="true" (onClick)="nextDialog()" class="w-5" styleClass="p-button-outlined p-button-secondary h-full w-full" [ngClass]="allAppointmentsSameHour ==='no' ? 'mb-7' : ''"></p-button>
       </div>
     </div>
     <div *ngIf="activeIndex === 2" class="container confirm mt-4 sm:mt-3 p-0 sm:p-2" [ngClass]="dialogError.error ? 'container-error' : ''">
@@ -103,7 +103,7 @@
     </add-to-calendar-button>
     </div>
     <div class="w-full flex justify-content-center mt-2 sm:mt-4" [ngClass]="appointments.length == 1 ? 'mt-5' : ''">
-      <p-button label="Confirm" [outlined]="true" (onClick)="nextDialog()" class="w-5" styleClass="p-button-outlined p-button-secondary h-full w-full" [ngClass]="allAppointmentsSameHour ==='no' ? 'mb-7' : ''"></p-button>
+      <p-button label="Confirm"  [loading]="nextDialogLoading" [outlined]="true" (onClick)="nextDialog()" class="w-5" styleClass="p-button-outlined p-button-secondary h-full w-full" [ngClass]="allAppointmentsSameHour ==='no' ? 'mb-7' : ''"></p-button>
     </div>
     </div>
   </div>

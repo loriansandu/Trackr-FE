@@ -53,6 +53,7 @@ export class KinetoTrackerComponent implements OnInit{
     { name: 'Catalina'}];
 editAppointmentDialogContainerHeight: string = '0';
 hideTodayApp: boolean = false;
+editAppointmentLoading: boolean = false;
 
   constructor(private messageService: MessageService, private appointmentService : AppointmentService) {
     this.containerWidth = window.innerWidth;
@@ -84,6 +85,7 @@ hideTodayApp: boolean = false;
   }
 
 
+  
   getSelectedDayAppointments() {
     this.appointmentService.getAppointmentsByDate(this.selectedDate).subscribe(
       (appointments) => {
@@ -104,6 +106,7 @@ hideTodayApp: boolean = false;
   }
 
   editAppointment() {
+    this.editAppointmentLoading = true;
     const currentAppointmentDate = new Date(this.selectedAppointment!.date);
     this.selectedAppointment!.title = this.selectedTitle;
     this.selectedAppointment!.trainer = this.selectedTrainer!.name;
@@ -118,10 +121,13 @@ hideTodayApp: boolean = false;
           summary: 'Success',
           detail: 'Appointment edited successfully!',
         });
+        this.editAppointmentLoading = false;
         this.getSelectedDayAppointments();
         this.getSelectedWeekAppointments();
+        this.editAppointmentDialog = false;
       },
       (error : HttpErrorResponse) => {
+        this.editAppointmentLoading = false;
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
@@ -256,6 +262,11 @@ hideTodayApp: boolean = false;
       default:
         return '#000000'; // Black (default)
     }
+  }
+  changeSelectedDay(appointment: Appointment) {
+    this.selectedDate = appointment.date
+    this.getSelectedDayAppointments();
+    this.getSelectedWeekAppointments();
   }
 }
 

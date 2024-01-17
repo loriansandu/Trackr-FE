@@ -44,7 +44,7 @@
 
 @media (max-width: 991px) {
     :host /deep/ .week-events {
-        max-height: 400px;
+        max-height: 300px;
         overflow: auto;
         padding: 20px;
     }
@@ -56,6 +56,9 @@
     }
     :host /deep/.p-card-content {
         padding-bottom: 0;
+    }
+    :host /deep/.p-dialog {
+        box-shadow: none;
     }
 
 }
@@ -265,7 +268,7 @@
 .menu-title {
     position: fixed;
     z-index: 999;
-    top: 27px;
+    top: 20px;
     left: 35%;
     font-size: 1.5rem;
     font-weight: 500;
