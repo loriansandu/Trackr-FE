@@ -54,6 +54,8 @@ export class KinetoTrackerComponent implements OnInit{
 editAppointmentDialogContainerHeight: string = '0';
 hideTodayApp: boolean = false;
 editAppointmentLoading: boolean = false;
+noAppointmentsSelectedWeek: boolean = false;
+  appointmentDeleteInProgress: boolean = false;
 
   constructor(private messageService: MessageService, private appointmentService : AppointmentService) {
     this.containerWidth = window.innerWidth;
@@ -67,8 +69,11 @@ editAppointmentLoading: boolean = false;
     this.getSelectedWeekAppointments();
   }
   getSelectedWeekAppointments() {
+    this.appointmentsSelectedWeek = []
+    this.noAppointmentsSelectedWeek = false
     this.appointmentService.getAppointmentsByWeek(this.selectedDate).subscribe(
       (appointments) => {
+        this.noAppointmentsSelectedWeek = appointments.length === 0;
         const today = new Date();
         this.appointmentsSelectedWeek = appointments.map((appointment) => {
           appointment.date = new Date(appointment.date);
@@ -87,6 +92,8 @@ editAppointmentLoading: boolean = false;
 
   
   getSelectedDayAppointments() {
+    this.appointments = []
+    this.noAppointments = false
     this.appointmentService.getAppointmentsByDate(this.selectedDate).subscribe(
       (appointments) => {
         this.noAppointments = appointments.length === 0;
@@ -167,13 +174,14 @@ editAppointmentLoading: boolean = false;
 
   onSelectDate($event: Date) {
     if(this.selectedDate != $event) {
-      if(!areDatesInSameWeek(this.selectedDate, $event)) {
-        this.selectedDate = $event;
+      const sD = this.selectedDate
+      this.selectedDate = $event;
+      if(!areDatesInSameWeek(sD, $event)) {
         this.getSelectedWeekAppointments();
       }
-      this.selectedDate = $event;
+      // this.selectedDate = $event;
       this.getSelectedDayAppointments();
-      this.getSelectedWeekAppointments();
+      // this.getSelectedWeekAppointments();
       let days = getWeekRange(this.selectedDate);
       this.firstDayOfSelectedWeek = days.firstDay;
       this.lastDayOfSelectedWeek = days.lastDay;
@@ -186,7 +194,8 @@ editAppointmentLoading: boolean = false;
     if(!this.editAppointmentDialog) {
       this.hideTodayApp = false;
       this.editAppointmentDialogContainerHeight = '0';
-      this.selectedAppointment = undefined;
+      // this.selectedAppointment = undefined;
+      this.editAppointmentDialog = false;
     
     }
     else {
@@ -195,8 +204,7 @@ editAppointmentLoading: boolean = false;
       } 
       this.selectedAppointment = appointment;
       this.selectedTitle = appointment.title
-      // this.selectedTrainer = new Trainer();
-      // this.selectedTrainer.name = appointment.trainer;
+      this.selectedTrainer = {name : appointment.trainer}
       this.selectedDate = appointment.date;
       this.selectedHour = appointment.hour;
       this.selectedMinute = appointment.minute;
@@ -204,6 +212,7 @@ editAppointmentLoading: boolean = false;
   }
 
   toggleDeleteAppointment(appointment: Appointment) {
+    this.appointmentDeleteInProgress = true;
     this.appointmentService.deleteAppointment(appointment).subscribe(
       (response : any) => {
         this.messageService.add({
@@ -211,10 +220,12 @@ editAppointmentLoading: boolean = false;
           summary: 'Success',
           detail: 'Appointment deleted successfully!',
         });
+        this.appointmentDeleteInProgress = false
         this.getSelectedDayAppointments();
         this.getSelectedWeekAppointments();
       },
       (error : HttpErrorResponse) => {
+        this.appointmentDeleteInProgress = false
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
@@ -264,9 +275,13 @@ editAppointmentLoading: boolean = false;
     }
   }
   changeSelectedDay(appointment: Appointment) {
+    const currentDate = this.selectedDate
     this.selectedDate = appointment.date
     this.getSelectedDayAppointments();
-    this.getSelectedWeekAppointments();
+    if(!areDatesInSameWeek(currentDate, this.selectedDate)) {
+      this.getSelectedWeekAppointments();
+    }
+
   }
 }
 

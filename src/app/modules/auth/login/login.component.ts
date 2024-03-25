@@ -76,6 +76,9 @@ redirectToGithub() {
 
     else
       this.desktopUa = true;
+
+    this.authForm.value.email = 'trackrtestemail@gmail.com'
+    this.authForm.value.password = 'test'
   }
 
   ngOnDestroy(): void {
@@ -90,10 +93,10 @@ redirectToGithub() {
   socialUser!: SocialUser;
   invalidCredentials: boolean = false;
   authForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
+    email: new FormControl('trackrtestemail@gmail.com', [Validators.required, Validators.email]),
     // email: new FormControl('', []),
     password: new FormControl(
-      '',
+      'test',
       [
         Validators.required,
         // Validators.pattern("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[-@$!%*#?&])[A-Za-z\\d-@$!%*#?&]{8,}$")
